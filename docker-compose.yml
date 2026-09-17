@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: darukaa-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: darukaa
+      POSTGRES_PASSWORD: darukaa
+      POSTGRES_DB: darukaa_earth
+    ports:
+      - "5433:5432"
+    volumes:
+      - darukaa_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-darukaa}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    container_name: darukaa-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - "8000:8000"
+    command: >
+      sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8000/api}
+        VITE_MAPBOX_TOKEN: ${VITE_MAPBOX_TOKEN:-}
+    container_name: darukaa-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  darukaa_postgres_data:
+
+

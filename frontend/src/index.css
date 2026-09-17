@@ -1,0 +1,36 @@
+@import "mapbox-gl/dist/mapbox-gl.css";
+@import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased;
+}
+
+.card {
+  @apply rounded-xl border border-gray-200 bg-white shadow-sm;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-lg bg-forest-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-forest-700 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.input-field {
+  @apply block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-forest-500 focus:outline-none focus:ring-1 focus:ring-forest-500;
+}
+
+.label-field {
+  @apply mb-1 block text-sm font-medium text-gray-700;
+}
