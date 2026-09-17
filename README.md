@@ -337,3 +337,5 @@ and site detail pages.
 - Role-based access control and audit logs
 - Satellite imagery basemap layer
 - Spatial intersection/overlap queries between sites
+
+This is a hackathon project.
