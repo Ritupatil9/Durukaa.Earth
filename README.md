@@ -144,7 +144,7 @@ python -m app.seed
 uvicorn app.main:app --reload
 ```
 
-Backend runs at `http://localhost:8000` (`/docs` for Swagger UI).
+Backend runs at `https://durukaa-earth-2.onrender.com` (`/docs` for Swagger UI).
 
 ### 4. Frontend
 
@@ -158,7 +158,7 @@ Copy-Item .env.example .env
 npm run dev
 ```
 
-Frontend runs at `http://localhost:5173`.
+Frontend runs at `https://durukaa-earth-delta.vercel.app`.
 
 ### 5. Log in
 
@@ -171,9 +171,9 @@ Copy-Item .env.example .env
 docker compose up --build
 ```
 
-- Frontend: `http://localhost:3000`
+- Frontend: `https://durukaa-earth-delta.vercel.app/dashboard`
 - Backend: `https://durukaa-earth-2.onrender.com/`
-- Postgres/PostGIS: `localhost:5432`
+- Postgres/PostGIS: `postgresql://darukaa:darukaa@localhost:5433/darukaa_earth`
 
 Run migrations + seed inside the backend container once it's up:
 
