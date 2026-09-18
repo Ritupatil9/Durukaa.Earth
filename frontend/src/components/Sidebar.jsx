@@ -20,19 +20,19 @@ export default function Sidebar({ isOpen, onClose }) {
         />
       )}
       <aside
-        className={`fixed z-40 flex h-full w-64 flex-col border-r border-gray-200 bg-canopy-900 text-white transition-transform lg:static lg:translate-x-0 ${
+        className={`fixed z-40 flex h-full w-64 flex-col bg-canopy-900 text-white transition-transform lg:static lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center gap-2 px-6 py-5">
-          <span className="text-2xl">🌳</span>
+        <div className="flex items-center gap-3 px-6 py-6">
+          <img src="/favicon.svg" alt="" className="h-10 w-10 rounded-2xl shadow-sm" />
           <div>
-            <p className="text-lg font-semibold leading-none">Darukaa.Earth</p>
-            <p className="text-xs text-forest-300">Carbon &amp; biodiversity GIS</p>
+            <p className="display-font text-xl leading-none">Darukaa.Earth</p>
+            <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-forest-300">Restoration atlas</p>
           </div>
         </div>
 
-        <nav className="flex-1 space-y-1 px-3">
+        <nav className="flex-1 space-y-2 px-3 pt-4">
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.to}
@@ -41,8 +41,8 @@ export default function Sidebar({ isOpen, onClose }) {
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                   isActive
-                    ? "bg-forest-600 text-white"
-                    : "text-gray-300 hover:bg-white/10 hover:text-white"
+                    ? "bg-forest-600 text-white shadow-lg shadow-black/10"
+                      : "text-gray-300 hover:bg-white/10 hover:text-white"
                 }`
               }
             >

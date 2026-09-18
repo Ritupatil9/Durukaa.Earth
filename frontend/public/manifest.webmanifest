@@ -1,0 +1,17 @@
+{
+  "name": "Darukaa.Earth",
+  "short_name": "Darukaa",
+  "description": "Carbon and biodiversity restoration atlas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f6ef",
+  "theme_color": "#163326",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

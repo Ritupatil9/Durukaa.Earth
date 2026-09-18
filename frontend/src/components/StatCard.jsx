@@ -1,7 +1,7 @@
 export default function StatCard({ label, value, suffix, icon, isLoading }) {
   return (
-    <div className="card flex items-center gap-4 p-5">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-forest-50 text-xl">
+    <div className="card group flex items-center gap-4 p-5 transition-transform hover:-translate-y-1">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#edf3e6] text-xl transition-colors group-hover:bg-[#d9e8c8]">
         {icon}
       </div>
       <div className="min-w-0">

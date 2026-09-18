@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Darukaa.Earth</title>
+  <rect width="64" height="64" rx="16" fill="#163326"/>
+  <path d="M48 12C30 14 18 24 18 39c0 7 5 12 12 12 15 0 24-13 18-39Z" fill="#d9e8c8"/>
+  <path d="M16 51c8-13 17-21 30-29" fill="none" stroke="#163326" stroke-linecap="round" stroke-width="4"/>
+</svg>

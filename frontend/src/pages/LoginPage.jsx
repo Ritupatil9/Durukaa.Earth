@@ -32,11 +32,11 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-canopy-900 px-4">
-      <div className="card w-full max-w-md p-8">
+    <div className="auth-shell flex min-h-screen items-center justify-center px-4 py-8">
+      <div className="auth-panel animate-rise card w-full max-w-md border-white/10 p-8 sm:p-10">
         <div className="mb-6 text-center">
-          <p className="text-3xl">🌳</p>
-          <h1 className="mt-2 text-xl font-semibold text-gray-900">Darukaa.Earth</h1>
+          <img src="/favicon.svg" alt="Darukaa.Earth" className="mx-auto h-12 w-12 rounded-2xl shadow-sm" />
+          <h1 className="display-font mt-4 text-3xl text-forest-900">Darukaa.Earth</h1>
           <p className="text-sm text-gray-500">Sign in to manage your projects and sites</p>
         </div>
 
