@@ -116,6 +116,59 @@ def build_analytics_series(base_carbon, base_biodiversity, base_tree_cover, base
     return records
 
 
+def seed_demo_for_user(db, user, project_name="Western Ghats Restoration") -> Project:
+    project = (
+        db.query(Project)
+        .filter(Project.name == project_name, Project.created_by == user.id)
+        .first()
+    )
+    if not project:
+        project = Project(
+            name=project_name,
+            description=(
+                "Multi-site carbon and biodiversity restoration program across the "
+                "Western Ghats near Pune, Maharashtra. Demonstration project."
+            ),
+            created_by=user.id,
+        )
+        db.add(project)
+        db.commit()
+        db.refresh(project)
+
+    for site_def in SITE_DEFINITIONS:
+        existing_site = (
+            db.query(Site).filter(Site.project_id == project.id, Site.name == site_def["name"]).first()
+        )
+        if existing_site:
+            continue
+
+        geometry = geojson_to_geometry(site_def["geometry"])
+        site = Site(
+            project_id=project.id,
+            name=site_def["name"],
+            description=site_def["description"],
+            geometry=geometry,
+            area_hectares=0,
+        )
+        db.add(site)
+        db.flush()
+        site.area_hectares = calculate_area_hectares(db, site.geometry)
+        db.commit()
+        db.refresh(site)
+
+        for record in build_analytics_series(
+            site_def["base_carbon_stock"],
+            site_def["base_biodiversity"],
+            site_def["base_tree_cover"],
+            site_def["base_species"],
+        ):
+            record.site_id = site.id
+            db.add(record)
+        db.commit()
+
+    return project
+
+
 def seed() -> None:
     Base.metadata.create_all(bind=engine)  # safety net if migrations haven't run
     db = SessionLocal()
@@ -134,57 +187,8 @@ def seed() -> None:
         else:
             print(f"Admin user already exists: {ADMIN_EMAIL}")
 
-        project = db.query(Project).filter(Project.name == "Western Ghats Restoration").first()
-        if not project:
-            project = Project(
-                name="Western Ghats Restoration",
-                description=(
-                    "Multi-site carbon and biodiversity restoration program across the "
-                    "Western Ghats near Pune, Maharashtra. Demonstration project."
-                ),
-                created_by=admin.id,
-            )
-            db.add(project)
-            db.commit()
-            db.refresh(project)
-            print(f"Created project: {project.name}")
-        else:
-            print(f"Project already exists: {project.name}")
-
-        for site_def in SITE_DEFINITIONS:
-            existing_site = (
-                db.query(Site).filter(Site.project_id == project.id, Site.name == site_def["name"]).first()
-            )
-            if existing_site:
-                print(f"  Site already exists: {site_def['name']}")
-                continue
-
-            geometry = geojson_to_geometry(site_def["geometry"])
-            site = Site(
-                project_id=project.id,
-                name=site_def["name"],
-                description=site_def["description"],
-                geometry=geometry,
-                area_hectares=0,
-            )
-            db.add(site)
-            db.flush()
-            site.area_hectares = calculate_area_hectares(db, site.geometry)
-            db.commit()
-            db.refresh(site)
-            print(f"  Created site: {site.name} ({site.area_hectares} ha)")
-
-            analytics_records = build_analytics_series(
-                site_def["base_carbon_stock"],
-                site_def["base_biodiversity"],
-                site_def["base_tree_cover"],
-                site_def["base_species"],
-            )
-            for record in analytics_records:
-                record.site_id = site.id
-                db.add(record)
-            db.commit()
-            print(f"    Seeded {len(analytics_records)} years of demonstration analytics.")
+        project = seed_demo_for_user(db, admin)
+        print(f"Demo project ready: {project.name}")
 
         print("\nSeed complete. NOTE: analytics values are synthetic demonstration data only.")
     finally:

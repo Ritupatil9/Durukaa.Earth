@@ -69,7 +69,10 @@ export default function SiteDetailPage() {
       <div className="card mb-6 p-5">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">{site.name}</h2>
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="text-lg font-semibold text-gray-900">{site.name}</h2>
+              <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">Demo data</span>
+            </div>
             <p className="text-sm text-gray-500">
               Project:{" "}
               {project ? (
@@ -120,7 +123,7 @@ export default function SiteDetailPage() {
       </div>
 
       <p className="mt-4 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">
-        {summary?.data_note}
+        <strong>Measurement provenance:</strong> {summary?.data_note} Values are deterministic seed records created for this demonstration.
       </p>
 
       {analytics.length === 0 ? (

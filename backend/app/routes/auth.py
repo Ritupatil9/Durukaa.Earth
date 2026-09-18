@@ -5,6 +5,7 @@ from app.database import get_db
 from app.dependencies.auth import get_current_user
 from app.models.user import User
 from app.schemas.auth import TokenResponse, UserLogin, UserOut, UserRegister
+from app.seed import seed_demo_for_user
 from app.utils.security import create_access_token, hash_password, verify_password
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -24,6 +25,7 @@ def register(payload: UserRegister, db: Session = Depends(get_db)) -> TokenRespo
     db.add(user)
     db.commit()
     db.refresh(user)
+    seed_demo_for_user(db, user, project_name="Western Ghats Restoration (Demo)")
 
     token = create_access_token(subject=str(user.id))
     return TokenResponse(access_token=token, user=UserOut.model_validate(user))
