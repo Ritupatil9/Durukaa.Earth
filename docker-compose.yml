@@ -40,7 +40,7 @@ services:
     build:
       context: ./frontend
       args:
-        VITE_API_URL: ${VITE_API_URL:-http://localhost:8000/api}
+        VITE_API_URL: ${VITE_API_URL:-https://durukaa-earth-2.onrender.com/api}
         VITE_MAPBOX_TOKEN: ${VITE_MAPBOX_TOKEN:-}
     container_name: darukaa-frontend
     restart: unless-stopped

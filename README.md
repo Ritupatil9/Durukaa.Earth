@@ -139,7 +139,7 @@ BACKEND_CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
 **frontend/.env** (copy from `frontend/.env.example`):
 
 ```
-VITE_API_URL=http://localhost:8000/api
+VITE_API_URL=https://durukaa-earth-2.onrender.com/api
 VITE_MAPBOX_TOKEN=your-mapbox-access-token-here
 ```
 
@@ -209,7 +209,7 @@ docker compose up --build
 ```
 
 - Frontend: `http://localhost:3000`
-- Backend: `http://localhost:8000`
+- Backend: `https://durukaa-earth-2.onrender.com/`
 - Postgres/PostGIS: `localhost:5432`
 
 Run migrations + seed inside the backend container once it's up:
