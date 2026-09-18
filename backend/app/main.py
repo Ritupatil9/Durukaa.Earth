@@ -26,7 +26,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
+    allow_origins=[
+         
+"frontend-six-indol-m9we45dec6.vercel.app",
+"frontend-git-main-ritu-s-projects-67d9b022.vercel.app",
+"frontend-g6r0svos1-ritu-s-projects-67d9b022.vercel.app",
+       ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
