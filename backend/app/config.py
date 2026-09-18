@@ -21,7 +21,12 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
-    BACKEND_CORS_ORIGINS: str = "http://localhost:5173,http://127.0.0.1:5173"
+    BACKEND_CORS_ORIGINS: str = (
+        "http://localhost:5173,http://127.0.0.1:5173,"
+        "https://frontend-six-indol-m9we45dec6.vercel.app,"
+        "https://frontend-git-main-ritu-s-projects-67d9b022.vercel.app,"
+        "https://frontend-g6r0svos1-ritu-s-projects-67d9b022.vercel.app"
+    )
 
     @property
     def cors_origins_list(self) -> list[str]:
